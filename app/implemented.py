@@ -4,7 +4,7 @@ from dao.movie import MovieDAO
 from service.director import DirectorService
 from service.genre import GenreService
 from service.movie import MovieService
-from setup_db import db
+from app.setup_db import db
 from dao.user import UserDAO
 from service.user import UserService
 
@@ -19,3 +19,4 @@ movie_service = MovieService(dao=movie_dao)
 
 user_dao = UserDAO(session=db.session)
 user_service = UserService(dao=user_dao)
+# auth_service = AuthService()

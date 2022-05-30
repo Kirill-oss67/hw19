@@ -1,12 +1,13 @@
 from flask import Flask
 from flask_restx import Api
 
-from config import Config
-from setup_db import db
+from app.config import Config
+from app.setup_db import db
 from views.directors import director_ns
 from views.genres import genre_ns
 from views.movies import movie_ns
 from views.users import user_ns
+from views.auth import auth_ns
 from dao.model.user import User
 
 
@@ -24,6 +25,7 @@ def register_extensions(app):
     api.add_namespace(genre_ns)
     api.add_namespace(movie_ns)
     api.add_namespace(user_ns)
+    api.add_namespace(auth_ns)
 
 
 def create_data(app, db):
