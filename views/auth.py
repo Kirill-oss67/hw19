@@ -1,6 +1,7 @@
 from flask import request
 from flask_restx import Resource, Namespace, abort
 from app.implemented import auth_service
+
 auth_ns = Namespace('auth')
 
 
@@ -18,4 +19,5 @@ class AuthView(Resource):
         refresh_token = req_json.get('refresh_token')
         if refresh_token is None:
             abort(400)
-
+        tokens = auth_service.refresh_jwd(refresh_token)
+        return tokens, 201

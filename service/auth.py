@@ -2,6 +2,7 @@ import calendar
 import datetime
 
 import jwt
+from flask_restx import abort
 
 from app.constants import algo, secret
 
@@ -31,5 +32,23 @@ class AuthService:
         return tokens
 
 
-def jwd_decode(refresh_token):
-    data = jwt.decode(jwt=refresh_token, key=secret, algorithms=algo)
+    def refresh_jwd(self, refresh_token):
+        try:
+            data = jwt.decode(jwt=refresh_token, key=secret, algorithms=algo)
+        except Exception:
+            abort(400)
+
+        username = data.get("username")
+        user = self.user_service.get_by_name(username)
+        data = {
+            "username": user.username,
+            "role": user.role
+        }
+        min30 = datetime.datetime.utcnow() + datetime.timedelta(minutes=30)
+        data["exp"] = calendar.timegm(min30.timetuple())
+        access_token = jwt.encode(data, secret, algorithm=algo)
+        days130 = datetime.datetime.utcnow() + datetime.timedelta(days=130)
+        data["exp"] = calendar.timegm(days130.timetuple())
+        refresh_token = jwt.encode(data, secret, algorithm=algo)
+        tokens = {"access_token": access_token, "refresh_token": refresh_token}
+        return tokens

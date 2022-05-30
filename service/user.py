@@ -34,6 +34,3 @@ class UserService:
             PWD_HASH_SALT,
             PWD_HASH_ITERATIONS
         ).decode("utf-8", "ignore")
-
-    def compare_passwords(self, hash_password, usual_password):
-        pass

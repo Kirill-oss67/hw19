@@ -11,7 +11,7 @@ class UserDAO:
     def get_all(self):
         return self.session.query(User).all()
 
-    def get_by_name(self,name):
+    def get_by_name(self, name):
         return self.session.query(User).filter(User.username == name).first()
 
     def create(self, data):

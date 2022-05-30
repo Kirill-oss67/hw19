@@ -8,7 +8,6 @@ from views.genres import genre_ns
 from views.movies import movie_ns
 from views.users import user_ns
 from views.auth import auth_ns
-from dao.model.user import User
 
 
 def create_app(config_object):
