@@ -6,7 +6,7 @@ from app.constants import secret, algo
 
 def auth_required(func):
     def wrapper(*args, **kwargs):
-        if 'Autorization' not in request.headers:
+        if 'Authorization' not in request.headers:
             abort(401)
 
         data = request.headers['Authorization']

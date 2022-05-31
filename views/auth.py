@@ -19,5 +19,5 @@ class AuthView(Resource):
         refresh_token = req_json.get('refresh_token')
         if refresh_token is None:
             abort(400)
-        tokens = auth_service.refresh_jwd(refresh_token)
+        tokens = auth_service.refresh_token(refresh_token)
         return tokens, 201
