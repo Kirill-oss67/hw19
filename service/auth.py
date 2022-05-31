@@ -31,7 +31,6 @@ class AuthService:
         tokens = {"access_token": access_token, "refresh_token": refresh_token}
         return tokens
 
-
     def refresh_jwd(self, refresh_token):
         try:
             data = jwt.decode(jwt=refresh_token, key=secret, algorithms=algo)
